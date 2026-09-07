@@ -1,0 +1,38 @@
+[*] Starting OPA server locally...
+[*] Loading policy into OPA...
+[+] Policy loaded successfully.
+
+==================================================================
+       ZERO-TRUST AGENT GOVERNANCE ARTIFACT EVALUATION REPORT     
+==================================================================
+Test 1: Legitimate Read Operation
+  -> Expected: True | Got: True | Status: [PASS]
+  -> Evaluation Latency: 3.07ms
+------------------------------------------------------------------
+Test 2: Unauthorized DB Access (Standard User)
+  -> Expected: False | Got: False | Status: [PASS]
+  -> Evaluation Latency: 2.65ms
+------------------------------------------------------------------
+Test 3: Authorized DB Access (Admin User)
+  -> Expected: True | Got: True | Status: [PASS]
+  -> Evaluation Latency: 4.44ms
+------------------------------------------------------------------
+Test 4: Attack Vector: Prompt Injection on Email Tool
+  -> Expected: False | Got: False | Status: [PASS]
+  -> Evaluation Latency: 4.27ms
+------------------------------------------------------------------
+Test 5: Attack Vector: Unverified Intent Tool Call
+  -> Expected: False | Got: False | Status: [PASS]
+  -> Evaluation Latency: 2.19ms
+------------------------------------------------------------------
+
+==================================================================
+                      SUMMARY & KPI VERIFICATION                  
+==================================================================
+Total Test Cases: 5
+Detection/Accuracy Rate: 100.0% (Target: >90%)
+Average Policy Latency: 3.32ms (Target: <100ms KPI)
+Audit Status: 100% Traceable Log Records Generated.
+==================================================================
+
+[*] Stopping OPA server...

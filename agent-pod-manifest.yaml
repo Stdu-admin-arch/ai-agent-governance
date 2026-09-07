@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: agent-governance-pod
+  labels:
+    app: autonomous-agent
+spec:
+  containers:
+  # 1. The Core AI Agent Container (Now equipped with SPIFFE ID Attestation)
+  - name: ai-agent-container
+    image: python:3.11-slim
+    command: ["sh", "-c", "echo 'Waiting for SPIRE identity issuance...' && while [ ! -f /spire/svid.crt ]; do sleep 1; done && echo 'SPIRE SVID Acquired! Starting Agent...'; sleep infinity"]
+    env:
+    - name: PROXY_ENDPOINT
+      value: "http://localhost:8080"
+    - name: SPIFFE_ENDPOINT_SOCKET
+      value: "/spire/agent.sock"
+    volumeMounts:
+    - name: spire-shared-socket
+      mountPath: /spire
+
+  # 2. SPIRE Agent / Credential Proxy Sidecar (Simulates workload attestation and issues the secure token)
+  - name: credential-proxy-sidecar
+    image: nginx:alpine
+    ports:
+    - containerPort: 8080
+    command: ["sh", "-c", "mkdir -p /spire && echo 'SPIFFE://cluster.local/ns/default/sa/agent-sa' > /spire/svid.crt && nginx -g 'daemon off;'"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+    - name: spire-shared-socket
+      mountPath: /spire
+
+  volumes:
+  - name: spire-shared-socket
+    emptyDir: {}

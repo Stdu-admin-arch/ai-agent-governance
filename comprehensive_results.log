@@ -1,0 +1,43 @@
+[*] Starting OPA server locally...
+[*] Loading policy into OPA...
+[+] Policy loaded successfully.
+
+==================================================================
+       ADVANCED ZERO-TRUST GOVERNANCE EVALUATION REPORT           
+==================================================================
+Test 1: Legitimate Read Operation
+  -> Expected: True | Got: True | Status: [PASS]
+  -> Latency: 2.83ms
+------------------------------------------------------------------
+Test 2: Unauthorized DB Access (Standard User)
+  -> Expected: False | Got: False | Status: [PASS]
+  -> Latency: 1.87ms
+------------------------------------------------------------------
+Test 3: Authorized DB Access (Admin User)
+  -> Expected: True | Got: True | Status: [PASS]
+  -> Latency: 1.43ms
+------------------------------------------------------------------
+Test 4: Attack Vector: Prompt Injection on Email Tool
+  -> Expected: False | Got: False | Status: [PASS]
+  -> Latency: 1.31ms
+------------------------------------------------------------------
+Test 5: Attack Vector: Unverified Intent Tool Call
+  -> Expected: False | Got: False | Status: [PASS]
+  -> Latency: 1.38ms
+------------------------------------------------------------------
+
+[*] Running Concurrency & Performance Load Test (50 parallel requests)...
+
+==================================================================
+                COMPREHENSIVE DISSERTATION METRICS                
+==================================================================
+Functional Test Accuracy: 100.0% (Target: >90%)
+Base Average Policy Latency: 1.76ms (Target: <100ms KPI)
+Load Test Avg Latency (50 concurrent): 14.42ms
+Load Test Max Latency: 36.25ms
+Audit Trail Records Generated: 5 structured events
+==================================================================
+
+[+] Structured audit log exported successfully to 'audit_trail_export.json'.
+
+[*] Stopping OPA server...

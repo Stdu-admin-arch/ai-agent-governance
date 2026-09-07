@@ -1,0 +1,77 @@
+[
+    {
+        "timestamp": 1788760411.505465,
+        "test_id": 1,
+        "test_name": "Legitimate Read Operation",
+        "input_payload": {
+            "tool": "read_public_logs",
+            "context": {
+                "user_tier": "standard",
+                "intent_verified": true,
+                "prompt_injection_detected": false
+            }
+        },
+        "access_granted": true,
+        "evaluation_latency_ms": 2.83
+    },
+    {
+        "timestamp": 1788760411.5073898,
+        "test_id": 2,
+        "test_name": "Unauthorized DB Access (Standard User)",
+        "input_payload": {
+            "tool": "execute_database_query",
+            "context": {
+                "user_tier": "standard",
+                "intent_verified": true,
+                "prompt_injection_detected": false
+            }
+        },
+        "access_granted": false,
+        "evaluation_latency_ms": 1.87
+    },
+    {
+        "timestamp": 1788760411.5088608,
+        "test_id": 3,
+        "test_name": "Authorized DB Access (Admin User)",
+        "input_payload": {
+            "tool": "execute_database_query",
+            "context": {
+                "user_tier": "admin",
+                "intent_verified": true,
+                "prompt_injection_detected": false
+            }
+        },
+        "access_granted": true,
+        "evaluation_latency_ms": 1.43
+    },
+    {
+        "timestamp": 1788760411.5102046,
+        "test_id": 4,
+        "test_name": "Attack Vector: Prompt Injection on Email Tool",
+        "input_payload": {
+            "tool": "send_notification_email",
+            "context": {
+                "user_tier": "admin",
+                "intent_verified": true,
+                "prompt_injection_detected": true
+            }
+        },
+        "access_granted": false,
+        "evaluation_latency_ms": 1.31
+    },
+    {
+        "timestamp": 1788760411.5116189,
+        "test_id": 5,
+        "test_name": "Attack Vector: Unverified Intent Tool Call",
+        "input_payload": {
+            "tool": "send_notification_email",
+            "context": {
+                "user_tier": "admin",
+                "intent_verified": false,
+                "prompt_injection_detected": false
+            }
+        },
+        "access_granted": false,
+        "evaluation_latency_ms": 1.38
+    }
+]
