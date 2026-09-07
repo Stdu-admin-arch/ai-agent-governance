@@ -31,4 +31,9 @@ kubectl get pods
 
 # View container bootstrap logs
 kubectl logs agent-governance-pod -c ai-agent-container
-Evaluation Results & KPIsFunctional Test Accuracy: 100% (Exceeding the >90 dissertation target)Base Policy Latency: ~1.8ms to 2.5ms (Well below the $<100\text{ms}$ KPI requirement)Concurrency Load Handling: Maintained a stable average latency of ~12ms–15ms under a 50-parallel request stress test.Auditability: Automatically exports structured JSON audit trails (audit_trail_export.json) for downstream compliance and reporting.
+
+##Evaluation Results & KPIs
+Functional Test Accuracy: 100% (Exceeding the >90 dissertation target)
+Base Policy Latency: ~1.8ms to 2.5ms (Well below the <100ms KPI requirement)
+Concurrency Load Handling: Maintained a stable average latency of ~12ms–15ms under a 50-parallel request stress test.
+Auditability: Automatically exports structured JSON audit trails (audit_trail_export.json) for downstream compliance and reporting.
